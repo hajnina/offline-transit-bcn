@@ -7,7 +7,7 @@ final class RouterTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let data = try! Bundle.module.url(forResource: "small-timetable", withExtension: "json").map { try Data(contentsOf: $0) }!
+        let data = try! fixtureURL("small-timetable", "json").map { try Data(contentsOf: $0) }!
         fixtureTimetable = RouterTests.decode(data)
     }
 
