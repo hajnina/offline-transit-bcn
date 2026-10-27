@@ -1,0 +1,14 @@
+build/
+.gradle/
+*.apk
+*.aab
+local.properties
+*.jks
+*.keystore
+!app/debug.keystore
+.env
+data/out/
+data/cache/
+.yoloseek/
+__pycache__/
+.idea/
