@@ -6,11 +6,18 @@ let package = Package(
     products: [
         .library(name: "TransitCore", targets: ["TransitCore"])
     ],
+    dependencies: [
+        .package(url: "https://github.com/weichsel/ZIPFoundation.git", exact: "0.9.20")
+    ],
     targets: [
-        .target(name: "TransitCore", path: "Sources/TransitCore"),
+        .target(
+            name: "TransitCore",
+            dependencies: ["ZIPFoundation"],
+            path: "Sources/TransitCore"
+        ),
         .testTarget(
             name: "TransitCoreTests",
-            dependencies: ["TransitCore"],
+            dependencies: ["TransitCore", "ZIPFoundation"],
             path: "Tests/TransitCoreTests",
             resources: [.copy("Fixtures")]
         )

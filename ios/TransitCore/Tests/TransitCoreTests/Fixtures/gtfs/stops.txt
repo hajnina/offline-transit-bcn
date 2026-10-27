@@ -1,0 +1,4 @@
+stop_id,stop_name,stop_lat,stop_lon
+S1,Sagrada Familia,41.4036,2.1744
+S2,Verdaguer,41.4022,2.1699
+S3,Placa Catalunya,41.3874,2.1681
