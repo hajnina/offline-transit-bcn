@@ -1,0 +1,33 @@
+{
+  "stops": {
+    "A": { "id": "A", "name": "Alpha",     "lat": 0.000, "lon": 0.000 },
+    "B": { "id": "B", "name": "Bravo",     "lat": 0.000, "lon": 0.001 },
+    "C": { "id": "C", "name": "Charlie",   "lat": 0.002, "lon": 0.002 },
+    "D": { "id": "D", "name": "Delta",     "lat": 0.004, "lon": 0.001 },
+    "E": { "id": "E", "name": "Echo",      "lat": 0.010, "lon": 0.001 }
+  },
+  "lines": {
+    "M1": { "id": "M1", "shortName": "M1", "colorHex": "#fb712b" },
+    "M3": { "id": "M3", "shortName": "M3", "colorHex": "#0f6bcd" }
+  },
+  "trips": [
+    {
+      "id": "M1a", "lineId": "M1", "headsign": "C",
+      "stopIds":   [ "A",   "B",   "C"   ],
+      "arrivals":  [ 100,   120,   140  ],
+      "departures":[ 100,   120,   140  ]
+    },
+    {
+      "id": "M1b", "lineId": "M1", "headsign": "A",
+      "stopIds":   [ "C",   "B",   "A"   ],
+      "arrivals":  [ 400,   410,   420  ],
+      "departures":[ 400,   410,   420  ]
+    },
+    {
+      "id": "M3b", "lineId": "M3", "headsign": "E",
+      "stopIds":   [ "D",   "E"   ],
+      "arrivals":  [ 1200,  1300 ],
+      "departures":[ 1200,  1300 ]
+    }
+  ]
+}
