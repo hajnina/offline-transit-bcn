@@ -1,0 +1,8 @@
+stop_id,stop_name,stop_lat,stop_lon
+sagrada,Sagrada Familia,41.4036,2.1744
+gloria,Placa de les Glories,41.4020,2.1720
+eixample,Eixample,41.3950,2.1700
+fortuna,Fortuna,41.3980,2.1600
+cotxera,Cotxera,41.3897,2.1680
+catalunya,Placa Catalunya,41.3870,2.1700
+aresta,Aresta,41.3922,2.1700
