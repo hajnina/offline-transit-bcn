@@ -8,6 +8,11 @@ let package = Package(
     ],
     targets: [
         .target(name: "TransitCore", path: "Sources/TransitCore"),
-        .testTarget(name: "TransitCoreTests", dependencies: ["TransitCore"], path: "Tests/TransitCoreTests")
+        .testTarget(
+            name: "TransitCoreTests",
+            dependencies: ["TransitCore"],
+            path: "Tests/TransitCoreTests",
+            resources: [.copy("Fixtures")]
+        )
     ]
 )
