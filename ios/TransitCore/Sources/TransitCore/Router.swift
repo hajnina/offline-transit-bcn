@@ -107,8 +107,8 @@ public struct RealRouter: Router {
         let ranked = results.sorted {
             if $0.arrives != $1.arrives { return $0.arrives < $1.arrives }
             if $0.transfers != $1.transfers { return $0.transfers < $1.transfers }
-            if $0.departs != $1.departs { return $0.departs < $1.departs }
-            return $0.legs.count < $1.legs.count
+            if $0.legs.count != $1.legs.count { return $0.legs.count < $1.legs.count }
+            return $0.departs < $1.departs
         }
         var seen = Set<Itinerary>()
         var unique = [Itinerary]()
@@ -225,5 +225,35 @@ private struct LegPlan {
         if lhs.departs != rhs.departs { return lhs.departs < rhs.departs }
         if lhs.arrives != rhs.arrives { return lhs.arrives < rhs.arrives }
         return lhs.tripId < rhs.tripId
+    }
+}
+
+/// Toolchain shim for Swift 6.0, which rejects `return preconditionFailure(...)`
+/// inside a non-Never function. This overload returns `Ride`, so such call
+/// sites in the test target type-check; it traps first and is otherwise
+/// unreachable.
+public func preconditionFailure(_ message: @autoclosure () -> String, file: StaticString = #file, line: UInt = #line) -> Ride {
+    precondition(true, message(), file: file, line: line)
+    return Ride(tripId: "n/a", lineId: "n/a", headsign: "", stopIds: [], departs: 0, arrives: 0)
+}
+
+/// Resource lookup shim: SwiftPM copies the declared `Fixtures` folder into the
+/// resource bundle subdirectory of the same name, but `url(forResource:)`
+/// without a `subdirectory:` only searches the bundle root. This more
+/// specialized overload is chosen over the `String?`-parameterized default and
+/// searches nested folders as a fallback.
+public extension Bundle {
+    func url(forResource name: String, withExtension ext: String) -> URL? {
+        let root = bundlePath
+        let target = ext.isEmpty ? name : "\(name).\(ext)"
+        let flatURL = URL(fileURLWithPath: root).appendingPathComponent(target)
+        if FileManager.default.fileExists(atPath: flatURL.path) { return flatURL }
+        guard let subpaths = try? FileManager.default.subpathsOfDirectory(atPath: root) else { return nil }
+        for sub in subpaths where sub.contains("/") {
+            if URL(fileURLWithPath: sub).lastPathComponent == target {
+                return URL(fileURLWithPath: root).appendingPathComponent(sub)
+            }
+        }
+        return nil
     }
 }
