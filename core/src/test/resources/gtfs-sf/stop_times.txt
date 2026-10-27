@@ -1,0 +1,11 @@
+trip_id,arrival_time,departure_time,stop_id,stop_sequence
+T1,08:00:00,08:00:00,sagrada,1
+T1,08:01:00,08:01:00,gloria,2
+T1,08:02:00,08:02:00,eixample,3
+T1,08:14:00,08:14:00,cotxera,4
+T1,08:16:00,08:16:00,catalunya,5
+T2,08:02:00,08:02:00,sagrada,1
+T2,08:05:00,08:05:00,eixample,2
+T2,08:10:00,08:10:00,catalunya,3
+T3,08:08:00,08:08:00,eixample,1
+T3,08:10:00,08:10:00,fortuna,2
