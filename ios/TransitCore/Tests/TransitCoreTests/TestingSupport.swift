@@ -1,4 +1,5 @@
 import Foundation
+import ZIPFoundation
 @testable import TransitCore
 
 // Test-target-only shims, kept OUT of the TransitCore library on purpose:
@@ -22,6 +23,22 @@ func fixtureURL(_ name: String, _ ext: String) -> URL? {
         }
     }
     return nil
+}
+
+func fixtureText(_ name: String) -> String {
+    guard let url = fixtureURL(name, "txt") else { return "" }
+    return (try? String(contentsOf: url, encoding: .utf8)) ?? ""
+}
+
+func zip(_ files: [String: String]) throws -> Data {
+    let archive = try Archive(accessMode: .create)
+    for (name, text) in files {
+        let data = Data(text.utf8)
+        try archive.addEntry(with: name, type: .file, uncompressedSize: Int64(data.count)) { position, size in
+            data.subdata(in: Int(position)..<min(Int(position) + size, data.count))
+        }
+    }
+    return archive.data ?? Data()
 }
 
 /// Toolchain shim for Swift 6.0, which rejects `return preconditionFailure(...)`
