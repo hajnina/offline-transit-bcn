@@ -22,5 +22,5 @@ jobs:
         if: hashFiles('gradlew') != ''
       - name: Gate (placeholder until the project has a gradle build)
         run: |
-          if [ -f gradlew ]; then chmod +x gradlew && ./gradlew test assembleDebug --no-daemon --stacktrace
+          if [ -f gradlew ]; then chmod +x gradlew && ./gradlew test $( [ -d app ] && echo assembleDebug ) --no-daemon --stacktrace
           else echo "no gradle project yet: nothing to gate"; fi
