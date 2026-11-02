@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "OfflineTransitBcn"
 include(":core")
+include(":app")
